@@ -12,13 +12,31 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    price: Number,
+    price: {
+        type: Number,
+        required: true,
+    },
+    onSale: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const Product = mongoose.model('Product', productSchema);
 
 const bike = new Product({ name: 'Mountain Bike', price: 399 });
 bike.save()
+    .then((data) => {
+        console.log('IT WORKED!!');
+        console.log(data);
+    })
+    .catch((err) => {
+        // console.log('OH NO, ERROR!!');
+        console.log(err);
+    });
+const helmet = new Product({ name: 'Bike Helmet', price: 399 });
+helmet
+    .save()
     .then((data) => {
         console.log('IT WORKED!!');
         console.log(data);
